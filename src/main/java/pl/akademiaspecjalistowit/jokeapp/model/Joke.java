@@ -15,10 +15,7 @@ public class Joke {
 
     @Override
     public String toString() {
-        return "Joke{" +
-                "id=" + id +
-                ", content='" + content + '\'' +
-                ", category='" + category + '\'' +
-                '}';
+        return '\n' + content + '\n' +
+                category + '\'' + '\n';
     }
 }
