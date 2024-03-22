@@ -1,11 +1,25 @@
 package pl.akademiaspecjalistowit.jokeapp.provider;
 
 import pl.akademiaspecjalistowit.jokeapp.model.Joke;
+import pl.akademiaspecjalistowit.jokeapp.repository.InMemmoryJokeRepository;
+import pl.akademiaspecjalistowit.jokeapp.repository.JokeRepository;
 
-public class JokeDataProvider implements JokeProvider{
+import java.util.List;
+import java.util.Random;
+
+public class JokeDataProvider implements JokeProvider {
+    private JokeRepository jokeRepository;
+
+    public JokeDataProvider() {
+        this.jokeRepository = new InMemmoryJokeRepository();
+    }
+
     @Override
     public Joke getJoke() {
-        return null;
+        Random rand = new Random();
+        List<Joke> listJokes = jokeRepository.getAllJokes();
+        Joke randomJoke = listJokes.get(rand.nextInt(listJokes.size()));
+        return randomJoke;
     }
 
     @Override
