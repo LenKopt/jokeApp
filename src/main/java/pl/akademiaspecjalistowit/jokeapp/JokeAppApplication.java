@@ -2,6 +2,8 @@ package pl.akademiaspecjalistowit.jokeapp;
 
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import pl.akademiaspecjalistowit.jokeapp.model.JokeDto;
+
 import java.io.IOException;
 import java.net.URI;
 import java.net.http.HttpClient;

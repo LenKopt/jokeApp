@@ -1,4 +1,4 @@
-package pl.akademiaspecjalistowit.jokeapp;
+package pl.akademiaspecjalistowit.jokeapp.model;
 
 public class JokeDto {
     private String category;
