@@ -1,5 +1,6 @@
 package pl.akademiaspecjalistowit.jokeapp.controller;
 
+import pl.akademiaspecjalistowit.jokeapp.model.Category;
 import pl.akademiaspecjalistowit.jokeapp.model.Joke;
 import pl.akademiaspecjalistowit.jokeapp.service.JokeService;
 import pl.akademiaspecjalistowit.jokeapp.service.JokeServiceImpl;
@@ -34,7 +35,12 @@ public class UserController {
         MenuService.printNameOfApplication();
         while (true) {
             try {
-                MenuService.printQuestionForUser();
+                MenuService.askUserAboutShowingCategory();
+                String userAnswer = scanner.nextLine().toUpperCase();
+                if (userAnswer.equals("Y")) {
+                    Category.showListCategories();
+                }
+                MenuService.askUserAboutContinue();
                 String userOption = scanner.nextLine().toUpperCase();
                 switch (userOption) {
                     case "Y":
