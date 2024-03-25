@@ -32,6 +32,12 @@ public class InMemmoryJokeRepository implements JokeRepository {
 
     @Override
     public List<Joke> getAllByCategory(String category) {
-        return null;
+
+        return dataBaseJokes
+                .entrySet()
+                .stream()
+                .filter(joke -> joke.getKey().ordinal() == Integer.parseInt(category) - 1)
+                .flatMap(categorySetEntry -> categorySetEntry.getValue().stream())
+                .collect(Collectors.toList());
     }
 }

@@ -24,6 +24,9 @@ public class JokeDataProvider implements JokeProvider {
 
     @Override
     public Joke getJokeByCategory(String category) {
-        return null;
+        Random rand = new Random();
+        List<Joke> listJokes = jokeRepository.getAllByCategory(category);
+        Joke randomJokeByCategory = listJokes.get(rand.nextInt(listJokes.size()));
+        return randomJokeByCategory;
     }
 }

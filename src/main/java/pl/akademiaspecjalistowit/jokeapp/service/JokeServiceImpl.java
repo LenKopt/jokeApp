@@ -13,12 +13,11 @@ public class JokeServiceImpl implements JokeService {
 
     @Override
     public Joke getJoke() {
-        System.out.println(jokeProvider.getJoke());
         return jokeProvider.getJoke();
     }
 
     @Override
     public Joke getJoke(String category) {
-        return null;
+        return jokeProvider.getJokeByCategory(category);
     }
 }

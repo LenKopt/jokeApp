@@ -1,5 +1,6 @@
 package pl.akademiaspecjalistowit.jokeapp.controller;
 
+import pl.akademiaspecjalistowit.jokeapp.Utils;
 import pl.akademiaspecjalistowit.jokeapp.model.Category;
 import pl.akademiaspecjalistowit.jokeapp.model.Joke;
 import pl.akademiaspecjalistowit.jokeapp.service.JokeService;
@@ -23,10 +24,6 @@ public class UserController {
 
     public void run() {
         scanner = new Scanner(System.in);
-//        List<User> listOfUsers = fileService.getUsersFromFile();
-//        loginService.setUsers(listOfUsers);
-//        Map<LocalDate, List<Visit>> visitsFromFile = fileService.getVisitsFromFile();
-//        visitService.setListVisits(visitsFromFile);
         mainMenuOption();
         scanner.close();
     }
@@ -35,23 +32,32 @@ public class UserController {
         MenuService.printNameOfApplication();
         while (true) {
             try {
-                MenuService.askUserAboutShowingCategory();
-                String userAnswer = scanner.nextLine().toUpperCase();
-                if (userAnswer.equals("Y")) {
-                    Category.showListCategories();
-                }
-                MenuService.askUserAboutContinue();
-                String userOption = scanner.nextLine().toUpperCase();
+                MenuService.showSelectionMenu();
+                String userOption = scanner.nextLine();
                 switch (userOption) {
-                    case "Y":
-                        Joke joke = jokeService.getJoke();
+                    case "1":
+                        Category.showListCategories();
+                        System.out.print("Enter number of category: ");
+                        userOption = scanner.nextLine();
+                        int intUserOption = Integer.parseInt(userOption);
+                        if (!Utils.getListOfCategoryNumbers().contains(intUserOption)) {
+                            throw new RuntimeException();
+                        }
+                        Joke joke = jokeService.getJoke(userOption);
+                        System.out.println(joke);
                         break;
-                    case "N":
+                    case "2":
+                        joke = jokeService.getJoke();
+                        System.out.println(joke);
+                        break;
+                    case "3":
                         System.exit(0);
                         break;
                     default:
                         throw new RuntimeException("Invalid option. Please choose a valid option.");
                 }
+            } catch (IllegalArgumentException e) {
+                System.out.println("This category hasn't jokes!");
             } catch (RuntimeException e) {
                 System.out.println("Input correct number menu");
             }
