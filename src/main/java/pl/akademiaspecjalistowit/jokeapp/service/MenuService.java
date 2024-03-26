@@ -24,6 +24,11 @@ public class MenuService {
     public static void showSelectionMenu() {
         System.out.println("Enter 1 - for get joke by category");
         System.out.println("Enter 2 - for get random joke");
-        System.out.println("Enter 3 - for exit");
+        System.out.println("Enter 0 - for exit");
+    }
+
+    public static void selectSource() {
+        System.out.println("Enter 1 - memory");
+        System.out.println("Enter 2 - internet");
     }
 }

@@ -36,7 +36,7 @@ public class InMemmoryJokeRepository implements JokeRepository {
         return dataBaseJokes
                 .entrySet()
                 .stream()
-                .filter(joke -> joke.getKey().ordinal() == Integer.parseInt(category) - 1)
+                .filter(joke -> joke.getKey().name().equalsIgnoreCase(category))
                 .flatMap(categorySetEntry -> categorySetEntry.getValue().stream())
                 .collect(Collectors.toList());
     }

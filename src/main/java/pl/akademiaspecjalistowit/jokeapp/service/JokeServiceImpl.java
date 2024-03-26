@@ -1,23 +1,31 @@
 package pl.akademiaspecjalistowit.jokeapp.service;
 
 import pl.akademiaspecjalistowit.jokeapp.model.Joke;
-import pl.akademiaspecjalistowit.jokeapp.provider.JokeDataProvider;
 import pl.akademiaspecjalistowit.jokeapp.provider.JokeProvider;
 
-public class JokeServiceImpl implements JokeService {
-    private JokeProvider jokeProvider;
+import java.util.List;
 
-    public JokeServiceImpl() {
-        jokeProvider = new JokeDataProvider();
+public class JokeServiceImpl implements JokeService {
+    private List<JokeProvider> jokeProviders;
+    private static long counter = 0;
+
+    public JokeServiceImpl(List<JokeProvider> jokeProviders) {
+
+        this.jokeProviders = jokeProviders;
+
     }
 
     @Override
     public Joke getJoke() {
-        return jokeProvider.getJoke();
+        return getJokeProvider().getJoke();
     }
 
     @Override
     public Joke getJoke(String category) {
-        return jokeProvider.getJokeByCategory(category);
+        return getJokeProvider().getJokeByCategory(category);
+    }
+
+    private JokeProvider getJokeProvider() {
+        return jokeProviders.get((int) counter++ % jokeProviders.size());
     }
 }
