@@ -7,4 +7,5 @@ import java.util.List;
 public interface JokeRepository {
     List<Joke> getAllJokes();
     List<Joke> getAllByCategory(String category);
+    List<String> getCategories();
 }

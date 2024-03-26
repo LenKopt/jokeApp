@@ -16,6 +16,6 @@ public class Joke {
     @Override
     public String toString() {
         return '\n' + content + '\n' +
-                category + '\'' + '\n';
+                category + '\n';
     }
 }

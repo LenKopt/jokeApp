@@ -1,17 +1,10 @@
 package pl.akademiaspecjalistowit.jokeapp.controller;
 
-import pl.akademiaspecjalistowit.jokeapp.Utils;
-import pl.akademiaspecjalistowit.jokeapp.model.Category;
 import pl.akademiaspecjalistowit.jokeapp.model.Joke;
-import pl.akademiaspecjalistowit.jokeapp.provider.JokeApiProvider;
 import pl.akademiaspecjalistowit.jokeapp.service.JokeService;
-import pl.akademiaspecjalistowit.jokeapp.service.JokeServiceImpl;
 import pl.akademiaspecjalistowit.jokeapp.service.MenuService;
 
-import java.lang.module.FindException;
-import java.time.LocalDate;
-import java.util.List;
-import java.util.Map;
+import java.io.IOException;
 import java.util.Scanner;
 
 public class UserController {
@@ -37,8 +30,8 @@ public class UserController {
                 String userOption = scanner.nextLine();
                 switch (userOption) {
                     case "1":
-                        Category.showListCategories();
-                        System.out.print("Enter number of category: ");
+                        System.out.println("You have next categories " + jokeService.getJokeAllCategory());
+                        System.out.print("Enter category for search: ");
                         userOption = scanner.nextLine();
 //                        int intUserOption = Integer.parseInt(userOption);
 //                        if (!Utils.getListOfCategoryNumbers().contains(intUserOption)) {
@@ -61,6 +54,10 @@ public class UserController {
                 System.out.println("This category hasn't jokes!");
             } catch (RuntimeException e) {
                 System.out.println("Input correct number menu");
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            } catch (InterruptedException e) {
+                throw new RuntimeException(e);
             }
         }
     }

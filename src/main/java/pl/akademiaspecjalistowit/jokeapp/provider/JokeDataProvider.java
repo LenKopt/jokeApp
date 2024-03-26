@@ -1,23 +1,22 @@
 package pl.akademiaspecjalistowit.jokeapp.provider;
 
 import pl.akademiaspecjalistowit.jokeapp.model.Joke;
-import pl.akademiaspecjalistowit.jokeapp.repository.InMemmoryJokeRepository;
 import pl.akademiaspecjalistowit.jokeapp.repository.JokeRepository;
 
 import java.util.List;
 import java.util.Random;
 
 public class JokeDataProvider implements JokeProvider {
-    private JokeRepository jokeRepository;
+    private List<JokeRepository> jokeRepositories;
 
-    public JokeDataProvider() {
-        this.jokeRepository = new InMemmoryJokeRepository();
+    public JokeDataProvider(List<JokeRepository> jokeRepository) {
+        this.jokeRepositories = jokeRepository;
     }
 
     @Override
     public Joke getJoke() {
         Random rand = new Random();
-        List<Joke> listJokes = jokeRepository.getAllJokes();
+        List<Joke> listJokes = getJokeRepository().getAllJokes();
         Joke randomJoke = listJokes.get(rand.nextInt(listJokes.size()));
         return randomJoke;
     }
@@ -25,8 +24,24 @@ public class JokeDataProvider implements JokeProvider {
     @Override
     public Joke getJokeByCategory(String category) {
         Random rand = new Random();
-        List<Joke> listJokes = jokeRepository.getAllByCategory(category);
+        List<Joke> listJokes = getJokeRepository().getAllByCategory(category);
         Joke randomJokeByCategory = listJokes.get(rand.nextInt(listJokes.size()));
         return randomJokeByCategory;
+    }
+
+    @Override
+    public List<String> getJokeAllCategory() {
+        return getJokeRepository().getCategories();
+    }
+
+    private JokeRepository getJokeRepository() {
+        Random rand = new Random();
+        int index = rand.nextInt(jokeRepositories.size());
+        if (index == 0) {
+            System.out.println("---Memory---");
+        } else {
+            System.out.println("---File---");
+        }
+        return jokeRepositories.get(index);
     }
 }

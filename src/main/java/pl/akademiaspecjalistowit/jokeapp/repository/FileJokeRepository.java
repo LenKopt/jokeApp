@@ -14,4 +14,9 @@ public class FileJokeRepository implements JokeRepository{
     public List<Joke> getAllByCategory(String category) {
         return null;
     }
+
+    @Override
+    public List<String> getCategories() {
+        return null;
+    }
 }
