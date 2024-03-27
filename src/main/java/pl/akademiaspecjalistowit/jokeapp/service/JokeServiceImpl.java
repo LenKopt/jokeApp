@@ -9,12 +9,10 @@ import java.util.Random;
 
 public class JokeServiceImpl implements JokeService {
     private List<JokeProvider> jokeProviders;
-    private static long counter = 0;
+    private int index;
 
     public JokeServiceImpl(List<JokeProvider> jokeProviders) {
-
         this.jokeProviders = jokeProviders;
-
     }
 
     @Override
@@ -24,17 +22,17 @@ public class JokeServiceImpl implements JokeService {
 
     @Override
     public Joke getJoke(String category) {
-        return getJokeProvider().getJokeByCategory(category);
+        return jokeProviders.get(index).getJokeByCategory(category);
     }
+
     public List<String> getJokeAllCategory() throws IOException, InterruptedException {
         return getJokeProvider().getJokeAllCategory();
     }
 
-
     private JokeProvider getJokeProvider() {
 
         Random rand = new Random();
-        int index = rand.nextInt(jokeProviders.size());
+        index = rand.nextInt(jokeProviders.size());
         //int index = 1;
         if (index == 0) {
             System.out.println("---Memory---");

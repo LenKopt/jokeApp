@@ -8,6 +8,7 @@ import java.util.Random;
 
 public class JokeDataProvider implements JokeProvider {
     private List<JokeRepository> jokeRepositories;
+    private int index;
 
     public JokeDataProvider(List<JokeRepository> jokeRepository) {
         this.jokeRepositories = jokeRepository;
@@ -24,7 +25,7 @@ public class JokeDataProvider implements JokeProvider {
     @Override
     public Joke getJokeByCategory(String category) {
         Random rand = new Random();
-        List<Joke> listJokes = getJokeRepository().getAllByCategory(category);
+        List<Joke> listJokes = jokeRepositories.get(index).getAllByCategory(category);
         Joke randomJokeByCategory = listJokes.get(rand.nextInt(listJokes.size()));
         return randomJokeByCategory;
     }
@@ -36,7 +37,7 @@ public class JokeDataProvider implements JokeProvider {
 
     private JokeRepository getJokeRepository() {
         Random rand = new Random();
-        int index = rand.nextInt(jokeRepositories.size());
+        index = rand.nextInt(jokeRepositories.size());
         if (index == 0) {
             System.out.println("---Memory---");
         } else {

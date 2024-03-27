@@ -33,10 +33,6 @@ public class UserController {
                         System.out.println("You have next categories " + jokeService.getJokeAllCategory());
                         System.out.print("Enter category for search: ");
                         userOption = scanner.nextLine();
-//                        int intUserOption = Integer.parseInt(userOption);
-//                        if (!Utils.getListOfCategoryNumbers().contains(intUserOption)) {
-//                            throw new RuntimeException();
-//                        }
                         Joke joke = jokeService.getJoke(userOption);
                         System.out.println(joke);
                         break;
