@@ -24,10 +24,16 @@ public class JokeDataProvider implements JokeProvider {
 
     @Override
     public Joke getJokeByCategory(String category) {
-        Random rand = new Random();
-        List<Joke> listJokes = jokeRepositories.get(index).getAllByCategory(category);
-        Joke randomJokeByCategory = listJokes.get(rand.nextInt(listJokes.size()));
-        return randomJokeByCategory;
+        try {
+            Random rand = new Random();
+            List<Joke> listJokes = jokeRepositories.get(index).getAllByCategory(category);
+            Joke randomJokeByCategory = listJokes.get(rand.nextInt(listJokes.size()));
+            return randomJokeByCategory;
+        } catch (IllegalArgumentException e) {
+            e.printStackTrace();
+            return null;
+        }
+
     }
 
     @Override
