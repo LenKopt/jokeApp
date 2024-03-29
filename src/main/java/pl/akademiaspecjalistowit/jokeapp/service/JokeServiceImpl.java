@@ -33,7 +33,7 @@ public class JokeServiceImpl implements JokeService {
 
         Random rand = new Random();
         index = rand.nextInt(jokeProviders.size());
-        //int index = 1;
+        //int index = 0;
         if (index == 0) {
             System.out.println("---Memory---");
         } else {

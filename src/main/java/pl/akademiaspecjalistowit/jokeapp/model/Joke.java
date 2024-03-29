@@ -12,10 +12,24 @@ public class Joke {
         this.content = content;
         this.category = category;
     }
+    private Joke(){
 
+    }
     @Override
     public String toString() {
         return '\n' + content + '\n' +
                 category + '\n';
+    }
+
+    public String getCategory() {
+        return category;
+    }
+
+    public UUID getId() {
+        return id;
+    }
+
+    public String getContent() {
+        return content;
     }
 }

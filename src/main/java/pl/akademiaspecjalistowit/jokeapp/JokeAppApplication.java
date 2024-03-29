@@ -22,7 +22,7 @@ public class JokeAppApplication {
     public static void main(String[] args) throws IOException, InterruptedException {
         Scanner scanner = new Scanner(System.in);
 
-        List<JokeRepository> jokeRepositories = List.of(new InMemmoryJokeRepository(), new FileJokeRepository());
+        List<JokeRepository> jokeRepositories = List.of(new InMemmoryJokeRepository(), new FileJokeRepository("src/main/resources/jokes.txt"));
 
         List<JokeProvider> jokeProviders = List.of(new JokeDataProvider(jokeRepositories), new JokeApiProvider(HttpClient.newHttpClient()));
         JokeService jokeService = new JokeServiceImpl(jokeProviders);

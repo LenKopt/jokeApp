@@ -44,6 +44,7 @@ public class JokeDataProvider implements JokeProvider {
     private JokeRepository getJokeRepository() {
         Random rand = new Random();
         index = rand.nextInt(jokeRepositories.size());
+        //index = 1;
         if (index == 0) {
             System.out.println("---Memory---");
         } else {
