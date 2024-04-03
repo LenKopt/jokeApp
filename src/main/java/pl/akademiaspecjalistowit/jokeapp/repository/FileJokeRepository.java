@@ -21,7 +21,7 @@ public class FileJokeRepository implements JokeRepository {
                     .stream()
                     .collect(Collectors.groupingBy(Joke::getCategory));
         } catch (IOException e) {
-            throw new RuntimeException("File was not readed");
+            throw new RuntimeException("File was not readed", e);
         }
     }
 
@@ -32,16 +32,11 @@ public class FileJokeRepository implements JokeRepository {
                 .stream()
                 .flatMap(categorySetEntry -> categorySetEntry.getValue().stream())
                 .collect(Collectors.toList());
-            }
+    }
 
     @Override
     public List<Joke> getAllByCategory(String category) {
-        return fileRepository
-                .entrySet()
-                .stream()
-                .filter(joke -> joke.getKey().equalsIgnoreCase(category))
-                .flatMap(categorySetEntry -> categorySetEntry.getValue().stream())
-                .collect(Collectors.toList());
+        return fileRepository.get(category);
     }
 
     @Override

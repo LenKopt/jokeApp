@@ -22,6 +22,7 @@ public class JokeServiceImpl implements JokeService {
 
     @Override
     public Joke getJoke(String category) {
+
         return jokeProviders.get(index).getJokeByCategory(category);
     }
 
@@ -33,7 +34,7 @@ public class JokeServiceImpl implements JokeService {
 
         Random rand = new Random();
         index = rand.nextInt(jokeProviders.size());
-        //int index = 0;
+
         if (index == 0) {
             System.out.println("---Memory---");
         } else {

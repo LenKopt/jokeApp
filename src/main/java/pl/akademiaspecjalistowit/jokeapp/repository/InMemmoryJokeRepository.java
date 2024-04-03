@@ -6,7 +6,7 @@ import java.util.*;
 import java.util.stream.Collectors;
 
 public class InMemmoryJokeRepository implements JokeRepository {
-    Map<String, Set<Joke>> dataBaseJokes;
+    private Map<String, Set<Joke>> dataBaseJokes;
 
     public InMemmoryJokeRepository() {
         this.dataBaseJokes = new HashMap<>();
