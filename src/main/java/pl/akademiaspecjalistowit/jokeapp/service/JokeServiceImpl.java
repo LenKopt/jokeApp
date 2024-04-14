@@ -1,24 +1,45 @@
 package pl.akademiaspecjalistowit.jokeapp.service;
 
 import pl.akademiaspecjalistowit.jokeapp.model.Joke;
-import pl.akademiaspecjalistowit.jokeapp.provider.JokeDataProvider;
 import pl.akademiaspecjalistowit.jokeapp.provider.JokeProvider;
 
-public class JokeServiceImpl implements JokeService {
-    private JokeProvider jokeProvider;
+import java.io.IOException;
+import java.util.List;
+import java.util.Random;
 
-    public JokeServiceImpl() {
-        jokeProvider = new JokeDataProvider();
+public class JokeServiceImpl implements JokeService {
+    private List<JokeProvider> jokeProviders;
+    private int index;
+
+    public JokeServiceImpl(List<JokeProvider> jokeProviders) {
+        this.jokeProviders = jokeProviders;
     }
 
     @Override
     public Joke getJoke() {
-        System.out.println(jokeProvider.getJoke());
-        return jokeProvider.getJoke();
+        return getJokeProvider().getJoke();
     }
 
     @Override
     public Joke getJoke(String category) {
-        return null;
+
+        return jokeProviders.get(index).getJokeByCategory(category);
+    }
+
+    public List<String> getJokeAllCategory() throws IOException, InterruptedException {
+        return getJokeProvider().getJokeAllCategory();
+    }
+
+    private JokeProvider getJokeProvider() {
+
+        Random rand = new Random();
+        index = rand.nextInt(jokeProviders.size());
+
+        if (index == 0) {
+            System.out.println("---Memory---");
+        } else {
+            System.out.println("---API---");
+        }
+        return jokeProviders.get(index);
     }
 }
